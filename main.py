@@ -10,18 +10,13 @@ import numpy as np
 ### Unaccessible Room / Wall - 0
 ### Agent Current Location - 0.25
 
-UNSCANNED_ROOM_VALUE = 1
-SCANNED_ROOM_VALUE = 0.75
-UNACCESSIBLE_ROOM_VALUE = 0
-AGENT_LOCATION_VALUE = 0.25
-
 
 ####### INIT VARIABLES #######
 fig = plt.figure()
 raw_floor_plan = np.loadtxt("building_floor_plan.txt", dtype=float)
 scanned_floor_plan = deepcopy(raw_floor_plan)
 meeting_location = np.array([8,5])
-number_of_agents = 1
+number_of_agents = 3
 list_of_agents = []
 im = plt.imshow(scanned_floor_plan)
 im.set_array(scanned_floor_plan)

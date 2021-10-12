@@ -1,6 +1,11 @@
 from copy import deepcopy
 import numpy as np
 
+UNSCANNED_ROOM_VALUE = 1
+SCANNED_ROOM_VALUE = 0.75
+UNACCESSIBLE_ROOM_VALUE = 0
+AGENT_LOCATION_VALUE = 0.25
+
 class Agent:
   def __init__(self, starting_location) -> None:
     self.current_location = np.array(starting_location)
