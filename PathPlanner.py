@@ -21,6 +21,10 @@ class PathPlanner:
     self.list_of_agents = list_of_agents
   
 
+  ### Function: Checks for the boundary, 
+  # True: Chosen move can be made
+  # False: Chosen move out of grid
+  #
   def checkBoundary(self, grid_size, i, j):
     if (i<0 or j<0):
       return False
@@ -31,16 +35,18 @@ class PathPlanner:
     return True
 
 
+  ### Function: Retruns a randomly chosen possible move
+  # @param: agent_location    [1x2] list    Agent's current location
+  # @param: is_searching      bool          is the agent searching or going to meeting point
+  #
   def getPossibleNeighbour(self, agent_location, is_searching):
     list_of_possible_moves = []
     x = agent_location[0] # I know this is actually inverted,
     y = agent_location[1] # but it makes more sense while reading
-    # for i in (x-1, x+1):
-    #   for j in (y-1, y+1):
+    
     locs = [[x-1,y],[x+1,y],[x,y+1],[x,y-1]]
     for loc in locs:
       if(self.checkBoundary(self.grid.shape, loc[0],loc[1])):
-        # if not (self.grid[i,j] == UNACCESSIBLE_ROOM_VALUE):
         if (self.grid[loc[0],loc[1]] == UNSCANNED_ROOM_VALUE):
           list_of_possible_moves.append(loc)
     return random.choice(list_of_possible_moves) if len(list_of_possible_moves)>0 else agent_location
@@ -50,8 +56,5 @@ class PathPlanner:
   #
   def planNextSteps(self):
     for agent in self.list_of_agents:
-      # x = agent.next_location[1]+1
-      # y = agent.next_location[0]
-      # agent.next_location = [y,x]
       agent.next_location = self.getPossibleNeighbour(agent.current_location, True)
     
