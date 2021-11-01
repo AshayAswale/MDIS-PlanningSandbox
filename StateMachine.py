@@ -27,6 +27,7 @@ class StateMachine:
   #
   #
   def getNextState(self):
+    # Plan next steps for all the agents
     self.path_planner.planNextSteps()
 
       
