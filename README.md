@@ -21,3 +21,5 @@ python3 trial.py
 
 ### Animation on Dan's new building plan with doors and rooms defined
 > Not done yet
+
+> Trying changes
