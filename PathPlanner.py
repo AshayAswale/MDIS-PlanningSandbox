@@ -1,6 +1,7 @@
 import numpy as np
 from copy import deepcopy
 from Agent import *
+from search import astar
 import random
 
 ### @package: PathPlanner
@@ -25,20 +26,28 @@ class PathPlanner:
   # True: Chosen move can be made
   # False: Chosen move out of grid
   #
-  def checkBoundary(self, grid_size, i, j):
-    if (i<0 or j<0):
-      return False
-    
-    if (i>(grid_size[0]-1) or j>(grid_size[1]-1)):
-      return False
 
-    return True
+
+  # def checkBoundary(self, grid_size, i, j):
+  #   if (i<0 or j<0):
+  #     return False
+    
+  #   if (i>(grid_size[0]-1) or j>(grid_size[1]-1)):
+  #     return False
+
+  #   return True
 
 
   ### Function: Retruns a randomly chosen possible move
   # @param: agent_location    [1x2] list    Agent's current location
   # @param: is_searching      bool          is the agent searching or going to meeting point
   #
+
+  def getNextMoves(self):
+    for agent in self.list_of_agents:
+      astar_path, aster_steps = astar(self.grid, agent.current_location, agent.final_location)
+      agent.path=astar_path
+
   def getPossibleNeighbour(self, agent_location, is_searching):
     list_of_possible_moves = []
     x = agent_location[0] # I know this is actually inverted,
@@ -52,9 +61,13 @@ class PathPlanner:
     return random.choice(list_of_possible_moves) if len(list_of_possible_moves)>0 else agent_location
 
 
-  ### Function: Plans the next steps for all the agents
-  #
-  def planNextSteps(self):
+  ## Function: Plans the next steps for all the agents
+  
+  def planNextSteps(self,iter_count):
+    # print(iter_count)
     for agent in self.list_of_agents:
-      agent.next_location = self.getPossibleNeighbour(agent.current_location, True)
-    
+      # agent.next_location = self.getPossibleNeighbour(agent.current_location, True)
+      if(iter_count<len(agent.path)):
+        agent.next_location = agent.path[iter_count]
+      else:
+        agent.next_location = agent.path[-1]
