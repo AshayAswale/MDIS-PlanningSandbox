@@ -21,3 +21,10 @@ python3 trial.py
 
 ### Animation on Dan's new building plan with doors and rooms defined
 > Not done yet
+
+### A* Path Planner
+
+> Given number of agents, random target locations are assigned and the path is planned using A* algorithm. 
+```bash
+python3 main.py
+```
