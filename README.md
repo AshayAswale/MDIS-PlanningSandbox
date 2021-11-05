@@ -25,4 +25,6 @@ python3 trial.py
 ### A* Path Planner
 
 > Given number of agents, random target locations are assigned and the path is planned using A* algorithm. 
-> Try python3 main.py
+```bash
+python3 main.py
+```
